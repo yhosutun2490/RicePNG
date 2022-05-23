@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDoList</title>
+    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <header>
+        <h1>Your Rice to Do List @PNG</h1>
+    </header>
+    <h1>Today is 0<%=systemdate.month+1%> / <%=systemdate.date%></h1>
+    <div class="first">
+        <form id="transplant_day">
+            <label for="plantingdate">Plant_Date</label>
+            <input type="date" name="palntingdate" id="palntingdate">
+        </form>
+        <h2>**New Plot is need to Register**</h2>
+    </div>
+ 
+    <form id="rice_trace">
+        <label for="plotid">Plot_ID</label>
+        <input type="text" name="plotid" id="plotid">
+        <label for="todothing">To_DO</label>
+        <input type="text" name="todothing" id="todothing">
+        <label for="tododate">To_DO_Date</label>
+        <input type="date" name="tododate" id="tododate"  required>
+        <button id="button" class="btn-add">Add into your rice program</button>
+    </form>
+    <container class="btn"> 
+        <div class="Trace">
+            <form id="tracepage" action="/agrotrace" method="POST">
+                <button class="tracepage">Agro-Tracebility</button>
+            </form>
+        </div>
+        <!-- <div class="sort">
+            <button>Sort by Time</button>
+        </div> -->
+    </container>
+
+    <container class="message">
+        <h2>Loading System Message</h2>
+            <textarea class="text1"></textarea>
+            <textarea class="text2"></textarea>
+            <textarea class="text3"></textarea>
+    </container>
+
+
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function(){ 
+    $(".btn-add").click(function(e){
+        e.preventDefault();
+        var userdata = {
+            transplant_day: $('input[name=palntingdate]').val(),
+            plotid : $('input[name=plotid]').val(),
+            todothing :$('input[name=todothing]').val(),
+            tododate :$('input[name=tododate]').val()
+        };
+        $.ajax({
+            data: userdata, 
+            url: '/',
+            dataType: 'json',
+            type: 'post', 
+            cache: false,
+            timeout: 5000,
+            success: function(res){
+                let tex1=res.check;
+                let tex2=res.datanumber;
+                let tex3=res.GDD;
+                 $(".text1").text(tex1);
+                 $(".text2").text(tex2);
+                 $(".text3").text(tex3);
+                 $("#plotid").focus(function(e){
+                    e.preventDefault();
+                    $("input[name=plotid]").val("");
+                    $("textarea").val("");
+                    });
+                },
+                error:function(jqXHR, textStatus, errorThrown){
+                    alert('error'+ textStatus+'errorThrown');}
+                });
+            });
+        var userplot = {
+            plotid : $('input[name=plotid]').val(),
+        };
+  
+   
+    $(".tracepage").click(function(e){
+        e.preventDefault();
+        console.log("clicking");
+        var userplot = {
+            plotid : $('input[name=plotid]').val(),
+        };
+        url ="/agrotrace/"+userplot.plotid;
+        console.log(url);
+        $("#tracepage").attr("action", url);
+        $("#tracepage").submit();
+    });
+
+});
+
+
+        // $.ajax({
+        //      data: userplot, 
+        //      url: urltext,
+        //      dataType: 'json',
+        //      type: 'get',
+        //      cache: false,
+        //      timeout: 5000,
+        //      success: function(res){
+        //         },
+        //     error:function(jqXHR, textStatus, errorThrown){
+        //         alert('error'+ textStatus+'errorThrown');}
+        //     });
+
+        
+</script>
+
+</html>

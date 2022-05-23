@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PNG Rice TraceBility Data</title>
+    <link rel="stylesheet" type="text/css " href="/styles/style2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+
+    <h1><%=userid%> RiceTracebility Data Page</h1>
+    <container class="main">
+        <div class="left">
+            <div class="head">
+                <h2>Your Rice Field Data</h2>
+            </div>
+
+            <table>
+                <tr>
+                    <th class="GDD">GDD</th>
+                    <th class="todothing">Rice Manegemnet</th>
+                    <th class="tododate">To do Date</th>
+                </tr>
+                <tr id="userdata">
+                    <% userdatasort.forEach((user)=> {%>
+                        <td class="GDD" >
+                            <%=user.Operation_GDD%>
+                        </td>
+                        <td class="todothing" >
+                            <%=user.todothing%>
+                        </td>
+                        <td class="tododate" >
+                            <%=user.tododate.toString().substr(4,11).split('-').join(' /')%>
+                        </td>
+                        <%})%>
+                </tr>
+            </table>
+        </div>
+        <div class="right">
+            <h2>NARI Rice Standard Calendar</h2>
+            <table>
+                <tr>
+                    <th class="GDD">GDD</th>
+                    <th class="todothing">Rice Manegemnet</th>
+                    <th class="tododate">To do Date</th>
+                </tr>
+                <tr id="naridata">
+                    <% naridata.forEach((user)=> {%>
+                        <td class="GDD">
+                            <%=user.Operation_GDD%>
+                        </td>
+                        <td class="todothing">
+                            <%=user.todothing%>
+                        </td>
+                        <td class="tododate">
+                            <%=new
+                                Date(user.Operation_GDD*86400000+(usertransplantday[0].tododate).getTime()).toString().substr(4,11).split('-').join('/')%>
+                        </td>
+                        <%})%>
+
+                </tr>
+            </table>
+        </div>
+    </container>
+
+
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+     for (let i=0;i<userdatasort.length;i++){
+         $("#userdata").after()
+     }   
+     });
+</script>
+
+</html>

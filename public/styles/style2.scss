@@ -1,0 +1,82 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+h1{
+    text-align: center;
+}
+h2{
+    text-align: center;
+}
+div.head{
+    display: flex;
+    justify-content: center;
+}
+button.sort{
+    margin-left: 20px ;
+    font-size: 16px;
+}
+
+container.main{
+    display: flex;
+
+}
+div.left{
+    width: 45%;
+    background-color: aqua;
+    margin: 20px;
+}
+div.right{
+    width: 45%;
+    background-color: aquamarine;
+    margin: 20px;
+}
+table th.GDD{
+    font-size: 25px;
+    text-align: center;
+    width: 25%;
+}
+table th.todothing{
+    font-size: 25px;
+    text-align: center;
+    width: 50%;
+}
+table th.tododate{
+    font-size: 25px;
+    text-align: center;
+    width: 25%;
+}
+table td.GDD{
+    width: 25%;
+    text-align: center;
+    font-size: 15px;
+    border: 1px solid grey;
+}
+table td.todothing{
+    width: 50%;
+    text-align: center;
+    font-size: 15px;
+    border: 1px solid grey;
+}
+table td.tododate{
+    width: 25%;
+    text-align: center;
+    font-size: 15px;
+    border: 1px solid grey;
+}
+   
+
+table tr{
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    align-items: center;
+}
+
+table{
+    border:1px #FFAC55 solid;padding:5px;
+    border-collapse:collapse;
+    
+}
+
