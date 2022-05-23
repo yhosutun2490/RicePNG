@@ -12,10 +12,14 @@ app.use(express.static("public"));
 app.use(bodyparser.urlencoded({ extended: true }));
 app.set("view egine", "ejs");
 app.use(methodOverride("_method"));
-mongoose.connect("mongodb://localhost:27017/RiceDB", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/RiceDB', {
+  useNewUrlParser: true,
+  useCreateIndex: true
 })
+// mongoose.connect("mongodb://localhost:27017/RiceDB", {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true
+// })
     .then(() => {
         console.log("Sucessfully connected");
     })
@@ -175,7 +179,10 @@ router.post("/agrotrace/:plotid", async(req, res) => {
 
 
 app.use("/", router);
-app.listen(3000, () => {
-    console.log("You are in the port 3000");
-});
+// app.listen(3000, () => {
+//     console.log("You are in the port 3000");
+// });
+app.listen(process.env.PORT || 3000, () => {
+    console.log('App is running')
+  });
 
